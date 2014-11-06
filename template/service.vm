@@ -1,0 +1,26 @@
+package ${table.packageName}.service;
+
+import java.util.List;
+import java.util.Map;
+import ${table.packageName}.model.${table.className};
+import org.unique.plugin.dao.Page;
+
+public interface ${table.className}Service {
+	
+	${table.className} get(${table.getFirstPrimaryKey().fieldType} ${table.getFirstPrimaryKey().fieldName});
+	
+	Map<String, Object> getMap(${table.className} ${table.classNameFirstLower}, ${table.getFirstPrimaryKey().fieldType} ${table.getFirstPrimaryKey().fieldName});
+	
+	boolean save(#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.fieldType} ${tempColumn.fieldName}#if($velocityCount!=$table.columnList.size()),#end#end #end);
+			
+	boolean update(${table.getFirstPrimaryKey().fieldType} ${table.getFirstPrimaryKey().fieldName},#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.fieldType} ${tempColumn.fieldName}#if($velocityCount!=$table.columnList.size()),#end#end #end);
+	
+	boolean delete(${table.getFirstPrimaryKey().fieldType} ${table.getFirstPrimaryKey().fieldName});
+	
+	List<Map<String, Object>> getList(#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.fieldType} ${tempColumn.fieldName},#end#end String order);
+	
+	Page<${table.className}> getPageList(#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.fieldType} ${tempColumn.fieldName},#end#end Integer page, Integer pageSize, String order);
+	
+	Page<Map<String, Object>> getPageMapList(Page<${table.className}> pageEntity);
+	
+}

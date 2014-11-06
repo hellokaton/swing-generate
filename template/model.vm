@@ -1,0 +1,36 @@
+##实体类代码
+package ${table.packageName}.model;
+#parse("./example.vm" )
+/**
+ * ${table.className}对象
+ * @email: ${contact}
+ * @author: ${author}
+ */
+@Component
+@Table(name="${table.tableName}")
+public class ${table.className} extends Model<${table.className}> {
+
+	private static final long serialVersionUID = 1L;
+	
+	public static ${table.className} db = new ${table.className}();
+	
+#foreach( $tempColumn in $table.columnList)
+#if(${tempColumn.columnComment.trim()} != '')
+	//${tempColumn.columnComment.trim()}
+#end
+	private ${tempColumn.fieldType} ${tempColumn.fieldName};
+	
+#end
+#foreach( $tempColumn in $table.columnList )
+#if(${tempColumn.fieldType}=="Date")
+@JsonSerialize(using = CustomDateSerializer.class)
+#end
+	public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
+		return ${tempColumn.fieldName};
+	}
+
+	public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} $tempColumn.fieldName) {
+		this.$tempColumn.fieldName = $tempColumn.fieldName;
+	}
+#end
+}

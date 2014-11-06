@@ -1,0 +1,50 @@
+package ${table.packageName}.controller;
+
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
+import org.unique.common.tools.StringUtils;
+import org.unique.ioc.annotation.Autowired;
+import org.unique.web.annotation.Action;
+import org.unique.plugin.dao.Page;
+import org.unique.web.annotation.Controller;
+
+
+/**
+ * 控制器
+ * @email: ${contact}
+ * @author: ${author}
+ */
+@Controller
+public class ${table.className}Controller {
+
+	private Logger logger = Logger.getLogger(${table.className}Controller.class);
+	
+	@Autowired
+	private ${table.className}Service ${table.classNameFirstLower}Service;
+		
+	@Action("index")
+	public void index() {
+		
+	}
+	
+	@Action("page")
+	public String page(){
+		return "page";
+	}
+	
+	@Action("save")
+	public void save(){
+		
+	}
+	
+	@Action("delete")
+	public void delete(){
+		
+	}
+	
+	@Action("update")
+	public void update(){
+		
+	}
+}

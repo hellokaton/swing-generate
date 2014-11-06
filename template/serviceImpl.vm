@@ -1,0 +1,118 @@
+package ${table.packageName}.service;
+
+import java.util.List;
+import java.util.Map;
+import org.apache.log4j.Logger;
+import ${table.packageName}.model.${table.className};
+import ${table.packageName}.service.${table.className}Service;
+import ${table.packageName}.util.BeanUtil;
+import org.unique.plugin.dao.Page;
+import org.unique.common.tools.StringUtils;
+import org.unique.ioc.annotation.Autowired;
+import org.unique.ioc.annotation.Service;
+import org.unique.plugin.dao.Page;
+import org.unique.plugin.dao.SqlBase;
+import org.unique.plugin.db.exception.UpdateException;
+
+@Service
+public class ${table.className}ServiceImpl implements ${table.className}Service{
+	
+	@Override
+	${table.className} get(${table.getFirstPrimaryKey().fieldType} ${table.getFirstPrimaryKey().fieldName}){
+		return ${table.className}.db.findByPK(${table.getFirstPrimaryKey().fieldName});		
+	}
+	
+	@Override
+	Map<String, Object> getMap(${table.className} ${table.classNameFirstLower}, ${table.getFirstPrimaryKey().fieldType} ${table.getFirstPrimaryKey().fieldName}){
+		Map<String, Object> resultMap = CollectionUtil.newHashMap();
+		if (null == ${table.classNameFirstLower}) {
+			${table.classNameFirstLower} = this.get(${table.getFirstPrimaryKey().fieldName});
+		}
+		if (null != ${table.classNameFirstLower}) {
+			resultMap = BeanUtil.toMap(${table.classNameFirstLower});
+		}
+		return resultMap;
+	}
+	
+	@Override
+	boolean save(#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.fieldType} ${tempColumn.fieldName}#if($velocityCount!=$table.columnList.size()),#end#end #end){
+		int count = 0;
+		
+		return count > 0;
+	}
+		
+	@Override
+	boolean update(${table.getFirstPrimaryKey().fieldType} ${table.getFirstPrimaryKey().fieldName},#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.fieldType} ${tempColumn.fieldName}#if($velocityCount!=$table.columnList.size()),#end#end #end){
+		int count = 0;
+		${table.className} ${table.classNameFirstLower} = this.get(${table.getFirstPrimaryKey().fieldName});
+		if (null != ${table.classNameFirstLower}) {
+			try {
+				
+			} catch (UpdateException e) {
+				count = 0;
+			}
+		}
+		return count > 0;
+	}
+	
+	@Override
+	boolean delete(${table.getFirstPrimaryKey().fieldType} ${table.getFirstPrimaryKey().fieldName}){
+		int count = 0;
+		if (null != ${table.getFirstPrimaryKey().fieldName}) {
+			${table.className} ${table.classNameFirstLower} = this.get(${table.getFirstPrimaryKey().fieldName});
+			if (null != ${table.classNameFirstLower}) {
+				try {
+					count = ${table.className}.db.delete("delete from ${table.tableName} where ${table.getFirstPrimaryKey().columnName} = ?", ${table.getFirstPrimaryKey().fieldName});
+				} catch (UpdateException e) {
+					count = 0;
+				}
+			}
+		}
+		return count > 0;
+	}
+	
+	@Override
+	List<Map<String, Object>> getList(#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.fieldType} ${tempColumn.fieldName},#end#end String order){
+		SqlBase base = SqlBase.select("select t.* from ${table.tableName} t");
+	#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+	base.eq("t.${tempColumn.columnName}", ${tempColumn.fieldName})
+	#end#end
+	base.order(order);
+		List<${table.className}> list = ${table.className}.db.findList(base.getSQL(), base.getParams());
+		return this.get${table.className}MapList(list);
+	}
+	
+	@Override
+	Page<${table.className}> getPageList(#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.fieldType} ${tempColumn.fieldName},#end#end Integer page, Integer pageSize, String order){
+		SqlBase base = SqlBase.select("select t.* from ${table.tableName} t");
+	#foreach( $tempColumn in $table.columnList )#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+	base.eq("t.${tempColumn.columnName}", ${tempColumn.fieldName})
+	#end#end
+	base.order(order);
+		return ${table.className}.db.findListPage(page, pageSize, base.getSQL(), base.getParams());
+	}
+	
+	@Override
+	Page<Map<String, Object>> getPageMapList(Page<${table.className}> pageEntity){
+
+		List<${table.className}> ${table.classNameFirstLower}List = pageEntity.getResults();
+		Page<Map<String, Object>> pageMap = new Page<Map<String, Object>>(pageEntity.getTotalCount() , pageEntity.getPage(), pageEntity.getPageSize());
+
+		List<Map<String, Object>> listMap = this.get${table.className}MapList(${table.classNameFirstLower}List);
+		pageMap.setResults(listMap);
+		return pageMap;
+	}
+	
+	private get${table.className}MapList(List<${table.className}> ${table.classNameFirstLower}){
+		List<Map<String, Object>> mapList = CollectionUtil.newArrayList();
+		for (int i = 0, len = list.size(); i < len; i++) {
+			${table.className} ${table.classNameFirstLower} = list.get(i);
+			if (null != ${table.classNameFirstLower}) {
+				Map<String, Object> map = this.getMap(${table.classNameFirstLower}, null);
+				mapList.add(map);
+			}
+		}
+		return mapList;
+	}
+	
+}
