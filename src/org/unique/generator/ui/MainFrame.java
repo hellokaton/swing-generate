@@ -163,8 +163,8 @@ public class MainFrame extends JFrame {
 					String outPath = txt_outdir.getText();
 					String prefix = txt_tableprefix.getText();
 					String contact = txt_contact.getText();
-					boolean flag = new CodeGenerator(classDriver, url, username, password, 
-							classPackage, author, contact, prefix, outPath).generator();
+					CodeGenerator.prefix = prefix;
+					boolean flag = new CodeGenerator().generator(classDriver, url, username, password, classPackage, author, contact, outPath);
 					if(flag){
 						int response = JOptionPane.showOptionDialog(MainFrame.this, "代码已经生成，是否打开输出目录？", "确认", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 						if(response == 0){
