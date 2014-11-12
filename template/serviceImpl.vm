@@ -103,7 +103,7 @@ public class ${table.className}ServiceImpl implements ${table.className}Service{
 		return pageMap;
 	}
 	
-	private get${table.className}MapList(List<${table.className}> ${table.classNameFirstLower}){
+	private List<Map<String, Object>> get${table.className}MapList(List<${table.className}> ${table.classNameFirstLower}){
 		List<Map<String, Object>> mapList = CollectionUtil.newArrayList();
 		for (int i = 0, len = list.size(); i < len; i++) {
 			${table.className} ${table.classNameFirstLower} = list.get(i);

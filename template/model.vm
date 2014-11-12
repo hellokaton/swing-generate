@@ -1,6 +1,5 @@
 ##实体类代码
 package ${table.packageName}.model;
-#parse("./example.vm" )
 /**
  * ${table.className}对象
  * @email: ${contact}
