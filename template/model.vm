@@ -1,12 +1,15 @@
 ##实体类代码
 package ${table.packageName}.model;
+
+import org.unique.support.orm.dao.Model;
+import org.unique.support.orm.dao.Table;
+
 /**
  * ${table.className}对象
  * @email: ${contact}
  * @author: ${author}
  */
-@Component
-@Table(name="${table.tableName}")
+@Table("${table.tableName}")
 public class ${table.className} extends Model<${table.className}> {
 
 	private static final long serialVersionUID = 1L;
