@@ -12,8 +12,8 @@ import org.unique.web.annotation.Controller;
 
 /**
  * 控制器
- * @email: ${contact}
- * @author: ${author}
+ * @author ${author}
+ * @since 1.0
  */
 @Controller
 public class ${table.className}Controller {

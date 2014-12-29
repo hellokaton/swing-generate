@@ -1,20 +1,23 @@
 ##实体类代码
 package ${table.packageName}.model;
 
-import org.unique.support.orm.dao.Model;
-import org.unique.support.orm.dao.Table;
+import java.io.Serializable;
+
+import org.unique.support.orm.DB;
+import org.unique.support.orm.Model;
+import org.unique.support.orm.annotation.Table;
 
 /**
  * ${table.className}对象
- * @email: ${contact}
- * @author: ${author}
+ * @author ${author}
+ * @since 1.0
  */
-@Table("${table.tableName}")
-public class ${table.className} extends Model<${table.className}> {
+@Table(value="${table.tableName}")
+public class ${table.className} extends Model<${table.className}> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static ${table.className} db = new ${table.className}();
+	public static DB<${table.className}> db = new DB<${table.className}>();
 	
 #foreach( $tempColumn in $table.columnList)
 #if(${tempColumn.columnComment.trim()} != '')
@@ -23,6 +26,8 @@ public class ${table.className} extends Model<${table.className}> {
 	private ${tempColumn.fieldType} ${tempColumn.fieldName};
 	
 #end
+	public ${table.className}(){}
+	
 #foreach( $tempColumn in $table.columnList )
 #if(${tempColumn.fieldType}=="Date")
 @JsonSerialize(using = CustomDateSerializer.class)
@@ -34,5 +39,6 @@ public class ${table.className} extends Model<${table.className}> {
 	public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} $tempColumn.fieldName) {
 		this.$tempColumn.fieldName = $tempColumn.fieldName;
 	}
+	
 #end
 }
