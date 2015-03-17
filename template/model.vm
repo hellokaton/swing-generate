@@ -23,14 +23,13 @@ public class ${table.className} extends Model<${table.className}> implements Ser
 #if(${tempColumn.columnComment.trim()} != '')
 	//${tempColumn.columnComment.trim()}
 #end
-	private ${tempColumn.fieldType} ${tempColumn.fieldName};
+	private ${tempColumn.fieldType} ${tempColumn.columnName};
 	
 #end
 	public ${table.className}(){}
 	
 #foreach( $tempColumn in $table.columnList )
 #if(${tempColumn.fieldType}=="Date")
-@JsonSerialize(using = CustomDateSerializer.class)
 #end
 	public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
 		return ${tempColumn.fieldName};

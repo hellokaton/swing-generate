@@ -136,7 +136,14 @@ public class Column {
 	}
 
 	public String getFieldGetMethod() {
-		this.fieldGetMethod = StringUtil.getGetMethod(this.fieldName);
+		if(null != this.fieldName){
+			this.fieldGetMethod = StringUtil.getGetMethod(this.fieldName);
+		} else {
+			if(null != this.columnName){
+				this.fieldGetMethod = StringUtil.getGetMethod(this.columnName);
+			}
+		}
+		
 		return fieldGetMethod;
 	}
 
