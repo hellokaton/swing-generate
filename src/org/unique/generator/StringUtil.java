@@ -75,13 +75,12 @@ public class StringUtil {
 		if ((field == null) || (field == "")) {
 			return "";
 		} else {
-			field = methodStr + field.substring(0, 1).toUpperCase()
-					+ field.substring(1);
+			field = methodStr + field.substring(0, 1).toUpperCase() + field.substring(1);
 
 			return field;
 		}
 	}
-
+	
 	/**
 	 * 去掉下划线，将下划线后首字母大写
 	 * 

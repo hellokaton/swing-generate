@@ -143,7 +143,6 @@ public class Column {
 				this.fieldGetMethod = StringUtil.getGetMethod(this.columnName);
 			}
 		}
-		
 		return fieldGetMethod;
 	}
 
@@ -152,7 +151,13 @@ public class Column {
 	}
 
 	public String getFieldSetMehtod() {
-		this.fieldSetMehtod = StringUtil.getSetMethod(this.fieldName);
+		if(null != this.fieldName){
+			this.fieldSetMehtod = StringUtil.getSetMethod(this.fieldName);
+		} else {
+			if(null != this.columnName){
+				this.fieldSetMehtod = StringUtil.getSetMethod(this.columnName);
+			}
+		}
 		return fieldSetMehtod;
 	}
 

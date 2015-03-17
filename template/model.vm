@@ -17,7 +17,7 @@ public class ${table.className} extends Model<${table.className}> implements Ser
 
 	private static final long serialVersionUID = 1L;
 	
-	public static DB<${table.className}> db = new DB<${table.className}>();
+	public static ${table.className} db = new ${table.className}();
 	
 #foreach( $tempColumn in $table.columnList)
 #if(${tempColumn.columnComment.trim()} != '')
@@ -32,11 +32,11 @@ public class ${table.className} extends Model<${table.className}> implements Ser
 #if(${tempColumn.fieldType}=="Date")
 #end
 	public ${tempColumn.fieldType} ${tempColumn.fieldGetMethod}() {
-		return ${tempColumn.fieldName};
+		return ${tempColumn.columnName};
 	}
 
-	public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} $tempColumn.fieldName) {
-		this.$tempColumn.fieldName = $tempColumn.fieldName;
+	public void ${tempColumn.fieldSetMehtod}(${tempColumn.fieldType} ${tempColumn.columnName}) {
+		this.${tempColumn.columnName} = ${tempColumn.columnName};
 	}
 	
 #end
