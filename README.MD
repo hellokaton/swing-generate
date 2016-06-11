@@ -18,8 +18,8 @@
 我的github：[王爵的github][5]
 
 
-  [1]: http://i2.tietuku.com/6aaec3ef020bf5bb.png
-  [2]: http://i2.tietuku.com/eadc707b70ecafdd.png
-  [3]: http://i2.tietuku.com/2b7f47a47a873024.png
-  [4]: http://i2.tietuku.com/3534f04aa2d6bc48.png
+  [1]: https://i.imgur.com/OnJHmpt.png
+  [2]: https://i.imgur.com/HIypWqD.png
+  [3]: https://i.imgur.com/Fu4IcsC.png
+  [4]: https://i.imgur.com/FXb7cyR.png
   [5]: https://github.com/biezhi
